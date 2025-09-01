@@ -24,9 +24,9 @@ const Index = () => {
     case 'menu':
       return <GameMenu onJoinLobby={handleJoinLobby} onStartRace={handleStartRace} />;
     case 'lobby':
-      return <GameLobby />;
+      return <GameLobby onStartRace={handleStartRace} />;
     case 'racing':
-      return <RacingGame />;
+      return <RacingGame onBackToLobby={handleBackToMenu} />;
     default:
       return <GameMenu onJoinLobby={handleJoinLobby} onStartRace={handleStartRace} />;
   }

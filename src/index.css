@@ -152,9 +152,21 @@ All colors MUST be HSL.
     box-shadow: var(--shadow-neon);
   }
 
-  /* Animations */
+  /* Game Animations */
   .pulse-neon {
     animation: pulse-neon 2s ease-in-out infinite alternate;
+  }
+
+  .car-engine {
+    animation: car-engine 0.1s ease-in-out infinite;
+  }
+
+  .speed-lines {
+    animation: speed-lines 0.5s linear infinite;
+  }
+
+  .track-scroll {
+    animation: track-scroll 2s linear infinite;
   }
 
   @keyframes pulse-neon {
@@ -166,13 +178,88 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes car-engine {
+    0%, 100% { transform: translateX(0px); }
+    50% { transform: translateX(1px); }
+  }
+
+  @keyframes speed-lines {
+    0% { 
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% { 
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes track-scroll {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(50px); }
+  }
+
   .racing-track {
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        hsl(var(--muted)) 0px,
+        hsl(var(--muted)) 2px,
+        transparent 2px,
+        transparent 50px
+      ),
+      linear-gradient(
+        90deg,
+        hsl(var(--primary) / 0.1) 0%,
+        hsl(var(--background)) 10%,
+        hsl(var(--background)) 90%,
+        hsl(var(--secondary) / 0.1) 100%
+      );
+  }
+
+  .track-lanes {
     background: repeating-linear-gradient(
       90deg,
-      hsl(var(--muted)) 0px,
-      hsl(var(--muted)) 10px,
-      transparent 10px,
-      transparent 20px
+      transparent 0px,
+      transparent 120px,
+      hsl(var(--muted) / 0.3) 120px,
+      hsl(var(--muted) / 0.3) 122px
     );
+  }
+
+  .car-sprite {
+    width: 40px;
+    height: 20px;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.1s ease-out;
+  }
+
+  .car-sprite::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .car-sprite.boosting::before {
+    opacity: 1;
+    box-shadow: 0 0 15px currentColor;
+  }
+
+  .minimap {
+    background: radial-gradient(circle at center, hsl(var(--background)), hsl(var(--muted)));
+    border: 2px solid hsl(var(--primary) / 0.3);
   }
 }

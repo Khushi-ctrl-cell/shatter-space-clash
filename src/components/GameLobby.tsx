@@ -20,7 +20,7 @@ interface Message {
   timestamp: Date;
 }
 
-const GameLobby = () => {
+const GameLobby = ({ onStartRace }: { onStartRace?: () => void }) => {
   const [players, setPlayers] = useState<Player[]>([
     { id: '1', name: 'Player 1', color: 'neon-blue', isReady: true, isHost: true },
     { id: '2', name: 'SpeedRacer', color: 'neon-green', isReady: true, isHost: false },
@@ -109,7 +109,7 @@ const GameLobby = () => {
               </Button>
               
               {allPlayersReady && (
-                <Button variant="winner" className="w-full">
+                <Button variant="winner" className="w-full" onClick={onStartRace}>
                   <Car className="w-4 h-4 mr-2" />
                   Start Race
                 </Button>
