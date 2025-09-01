@@ -1,14 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import GameMenu from '@/components/GameMenu';
+import GameLobby from '@/components/GameLobby';
+import RacingGame from '@/components/RacingGame';
+
+type GameState = 'menu' | 'lobby' | 'racing';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [gameState, setGameState] = useState<GameState>('menu');
+
+  const handleJoinLobby = () => {
+    setGameState('lobby');
+  };
+
+  const handleStartRace = () => {
+    setGameState('racing');
+  };
+
+  const handleBackToMenu = () => {
+    setGameState('menu');
+  };
+
+  switch (gameState) {
+    case 'menu':
+      return <GameMenu onJoinLobby={handleJoinLobby} onStartRace={handleStartRace} />;
+    case 'lobby':
+      return <GameLobby />;
+    case 'racing':
+      return <RacingGame />;
+    default:
+      return <GameMenu onJoinLobby={handleJoinLobby} onStartRace={handleStartRace} />;
+  }
 };
 
 export default Index;
